@@ -1,4 +1,10 @@
-var cubeText = "";
+var name = [];
+var views = [];
+var subs = [];
+var comments = [];
+var vids = [];
+var notFound = [];
+var channelNotFound = 0;
 
 function getPowerOfTwo(value, pow) {
 	var pow = pow || 1;
@@ -52,13 +58,14 @@ function createMultilineText(ctx, textToWrite, maxWidth, text) {
 	return maxLineWidth;
 }
 
-function drawText() {
+function drawText(data, num) {
 	var canvasX, canvasY;
 	var textX, textY;
 
 	var text = [];
-	var textToWrite = cubeText;
-	
+	var textToWrite = data;
+	console.log(data);
+
 	var maxWidth = 256;
 	
 	var squareTexture = 1;
@@ -70,7 +77,7 @@ function drawText() {
 	
 	var bgColor = "#FFF";	// Change background color here
 	
-	var canvas = document.getElementById('textureCanvas');
+	var canvas = document.getElementById('textureCanvas' + num);
 	var ctx = canvas.getContext('2d');
 	
 	ctx.font = textHeight+"px "+fontFamily;
@@ -86,8 +93,8 @@ function drawText() {
 		(canvasX > canvasY) ? canvasY = canvasX : canvasX = canvasY;
 	}
 
-	console.log("Calculated Width: " + canvasX);
-	console.log("Calculated Height: " + canvasY);
+	// console.log("Calculated Width: " + canvasX);
+	// console.log("Calculated Height: " + canvasY);
 
 	canvas.width = canvasX;
 	canvas.height = canvasY;
@@ -115,4 +122,9 @@ function drawText() {
 	}
 }
 
-drawText();
+drawText(name, 0);
+drawText(subs, 1);
+drawText(views, 2);
+drawText(comments, 3);
+drawText(vids, 4);
+drawText(name, 5);

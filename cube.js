@@ -98,11 +98,40 @@ function handleLoadedTexture(texture, textureCanvas) {
     gl.bindTexture(gl.TEXTURE_2D, null);
 }
 
-var canvasTexture;
+// var canvasTexture;
+var textures = [];
 
 function initTexture() {
-    canvasTexture = gl.createTexture();
-    handleLoadedTexture(canvasTexture, document.getElementById('textureCanvas'));
+    // Creating textures
+    // for (var i = 0; i < 6; i++) {
+    //     var canvasTexture = gl.createTexture();
+    //     handleLoadedTexture(canvasTexture, document.getElementById('textureCanvas' + i));
+    //     textures.push(canvasTexture);
+    // }
+    var canvasTexture0 = gl.createTexture();
+    handleLoadedTexture(canvasTexture0, document.getElementById('textureCanvas0'));
+    textures.push(canvasTexture0);
+
+    var canvasTexture1 = gl.createTexture();
+    handleLoadedTexture(canvasTexture1, document.getElementById('textureCanvas1'));
+    textures.push(canvasTexture1);
+
+    var canvasTexture2 = gl.createTexture();
+    handleLoadedTexture(canvasTexture2, document.getElementById('textureCanvas2'));
+    textures.push(canvasTexture2);
+
+    var canvasTexture3 = gl.createTexture();
+    handleLoadedTexture(canvasTexture3, document.getElementById('textureCanvas3'));
+    textures.push(canvasTexture3);
+
+    var canvasTexture4 = gl.createTexture();
+    handleLoadedTexture(canvasTexture4, document.getElementById('textureCanvas4'));
+    textures.push(canvasTexture4);
+
+    var canvasTexture5 = gl.createTexture();
+    handleLoadedTexture(canvasTexture5, document.getElementById('textureCanvas5'));
+    textures.push(canvasTexture5);
+
 }
 
 var mvMatrix = mat4.create();
@@ -310,8 +339,22 @@ function drawScene() {
     gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexTextureCoordBuffer);
     gl.vertexAttribPointer(shaderProgram.textureCoordAttribute, cubeVertexTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
+    //console.log(textures.length);
+
     gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, canvasTexture);
+    //gl.bindTexture(gl.TEXTURE_2D, canvasTexture);
+    gl.bindTexture(gl.TEXTURE_2D, textures[0]);
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, textures[1]);
+    gl.activeTexture(gl.TEXTURE2);
+    gl.bindTexture(gl.TEXTURE_2D, textures[2]);
+    gl.activeTexture(gl.TEXTURE3);
+    gl.bindTexture(gl.TEXTURE_2D, textures[3]);
+    gl.activeTexture(gl.TEXTURE4);
+    gl.bindTexture(gl.TEXTURE_2D, textures[4]);
+    gl.activeTexture(gl.TEXTURE5);
+    gl.bindTexture(gl.TEXTURE_2D, textures[5]);
+
     gl.uniform1i(shaderProgram.samplerUniform, 0);
     var lighting = true;
     gl.uniform1i(shaderProgram.useLightingUniform, lighting);
