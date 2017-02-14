@@ -57,7 +57,7 @@ function drawText() {
 	var textX, textY;
 
 	var text = [];
-	var textToWrite = document.getElementById('text').value;
+	var textToWrite = cubeText;
 	
 	var maxWidth = 256;
 	
