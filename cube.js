@@ -108,6 +108,7 @@ function initTexture() {
 var mvMatrix = mat4.create();
 var mvMatrixStack = [];
 var pMatrix = mat4.create();
+var rotMatrix = mat4.create();
 
 function mvPushMatrix() {
     var copy = mat4.create();
@@ -135,12 +136,6 @@ function setMatrixUniforms() {
 function degToRad(degrees) {
     return degrees * Math.PI / 180;
 }
-
-var xRot = 0;
-var xSpeed = 10;
-
-var yRot = 0;
-var ySpeed = -10;
 
 var z = -5.0;
 
@@ -298,14 +293,13 @@ function drawScene() {
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
-
     mat4.identity(mvMatrix);
 
     mat4.translate(mvMatrix, [0.0, 0.0, z]);
 
-    mat4.rotate(mvMatrix, degToRad(xRot), [1, 0, 0]);
-    mat4.rotate(mvMatrix, degToRad(yRot), [0, 1, 0]);
+    mat4.multiply(mvMatrix, rotMatrix);
+
+    mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
 
     gl.bindBuffer(gl.ARRAY_BUFFER, cubeVertexPositionBuffer);
     gl.vertexAttribPointer(shaderProgram.vertexPositionAttribute, cubeVertexPositionBuffer.itemSize, gl.FLOAT, false, 0, 0);
@@ -337,24 +331,10 @@ function drawScene() {
     gl.drawElements(gl.TRIANGLES, cubeVertexIndexBuffer.numItems, gl.UNSIGNED_SHORT, 0);
 }
 
-var lastTime = 0;
-
-function animate() {
-    var timeNow = new Date().getTime();
-    if (lastTime != 0) {
-        var elapsed = timeNow - lastTime;
-
-        xRot += (xSpeed * elapsed) / 1000.0;
-        yRot += (ySpeed * elapsed) / 1000.0;
-    }
-    lastTime = timeNow;
-}
-
 
 function tick() {
     requestAnimFrame(tick);
     drawScene();
-    animate();
 }
 
 
@@ -364,6 +344,8 @@ function webGLStart() {
     initShaders();
     initBuffers();
     initTexture();
+
+    mat4.identity(rotMatrix);
 
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.enable(gl.DEPTH_TEST);
