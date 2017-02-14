@@ -1,4 +1,4 @@
-document.getElementById("button").onclick = function() {
+function getData() {
     var channel = document.getElementById("channel").value;
     var key = "&key=AIzaSyDUr_yXwdPp5pXNTentKbNhGauIKVFVXDY";
     var query = "https://www.googleapis.com/youtube/v3/channels?part=statistics";
@@ -6,7 +6,7 @@ document.getElementById("button").onclick = function() {
     channel = "&forUsername=" + channel;
     query += channel + key;
 
-    $.get(query, (res) => {
+    $.get(query, function(res) {
         var data = res["items"][0];
 
         if (data) {
@@ -15,13 +15,11 @@ document.getElementById("button").onclick = function() {
             cubeText += "Subs: "     + data.statistics.subscriberCount   + "\n";
             cubeText += "Vids: "     + data.statistics.videoCount        + "\n";
             cubeText += "Views: "    + data.statistics.viewCount         + "\n";
-            console.log(data.statistics);
-            console.log(cubeText);
         } else {
-            cubeText = "Channel not found.";
+            cubeText = "Channel not found!";
         }
-    });
 
-    drawText();
-    initTexture();
+        drawText();
+        initTexture();
+    });
 };
