@@ -3,11 +3,13 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 		<title>YouTube Cube</title>
+		<script src="jquery-3.1.1.min.js" type="text/javascript"></script>
+		<title>Graphics Hackathon</title>
 	</head>
 
 	<body>
 		<div class="canvasText">
-			<h3><a name="textureGenerator">Texture Generator</a></h3>
+			<h3>Youtube Channel Visualizer</h3>
 			<div class="question">
 				<label>Text</label>
 				<textarea id="text">HTML5 ROCKS!</textarea>
@@ -16,6 +18,7 @@
 			<div class="canvasContainer">
 				<canvas id="textureCanvas" style="display: none;" width="256" height="256">I'm sorry your browser does not support the HTML5 canvas element.</canvas>
 			</div>
+
 			<!-- Texture Generation Script -->
 			<script type="text/javascript" src="cubeText.js"></script>
 		</div>
@@ -74,6 +77,11 @@
 			<script type="text/javascript" src="cube.js"></script>
 		</div>
 
+	<label>Enter channel name:</label>
+	<input id="channel">
+	<input type="button" id="button" value="Update Cube">
 	</body>
+
+	<script src="youtube.js" type="text/javascript"></script>
 </html>
 

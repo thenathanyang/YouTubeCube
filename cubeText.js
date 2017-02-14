@@ -1,3 +1,5 @@
+var cubeText = "";
+
 function getPowerOfTwo(value, pow) {
 	var pow = pow || 1;
 	while(pow<value) {
