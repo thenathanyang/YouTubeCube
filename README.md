@@ -1,7 +1,7 @@
-# midterm-hackathon16
+# The YouTube Cube
 
-Adam Jones
-Nathan Yang
+Adam Jones <br/>
+Nathan Yang <br/>
 CS 174A, Winter 2017
 
 ## Overview
