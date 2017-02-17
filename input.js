@@ -8,13 +8,7 @@ document.onkeydown = function(e) {
             mat4.rotate(rotMatrix, degToRad(4), [0, 1, 0]);
             break;
         case "ArrowRight":
-            mat4.rotate(rotMatrix, degToRad(-4), [0, 1, 0]);
-            break;
-        case "ArrowUp":
-            mat4.rotate(rotMatrix, degToRad(4), [1, 0, 0]);
-            break;
-        case "ArrowDown":
-            mat4.rotate(rotMatrix, degToRad(-4), [1, 0, 0]);
+            mat4.rotate(rotMatrix, degToRad(-4), [0, 1, 0]);1
             break;
         case "r":
             mat4.identity(rotMatrix);

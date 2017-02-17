@@ -1,9 +1,9 @@
 function getData() {
     var channel = document.getElementById("channel").value;
-    var tempName = channel; 
     var key = "&key=AIzaSyDUr_yXwdPp5pXNTentKbNhGauIKVFVXDY";
     var query = "https://www.googleapis.com/youtube/v3/channels?part=statistics";
 
+    var name = channel;
     channel = "&forUsername=" + channel;
     query += channel + key;
 
@@ -11,30 +11,17 @@ function getData() {
         var data = res["items"][0];
 
         if (data) {
-            // Clear the data
-            name     = "";
-            comments = "";
-            subs     = "";
-            vids     = "";
-            views    = "";
-
-            // Fill in the data
-            name     = tempName + "\n";
-            comments = "Comments: " + data.statistics.commentCount      + "\n";
-            subs     = "Subs: "     + data.statistics.subscriberCount   + "\n";
-            vids     = "Videos: "   + data.statistics.videoCount        + "\n";
-            views    = "Views: "    + data.statistics.viewCount         + "\n";
+            cubeText = "";
+            cubeText += "Name: "     + name                              + ", ";
+            cubeText += "Comments: " + data.statistics.commentCount      + ", ";
+            cubeText += "Subs: "     + data.statistics.subscriberCount   + ", ";
+            cubeText += "Vids: "     + data.statistics.videoCount        + ", ";
+            cubeText += "Views: "    + data.statistics.viewCount;
         } else {
-            channelNotFound = 1;
-            notFound = "Channel not found!";
+            cubeText = "Channel not found!";
         }
 
-        drawText(name, 0);
-        drawText(subs, 1);
-        drawText(views, 2);
-        drawText(comments, 3);
-        drawText(vids, 4);
-        drawText(name, 5);
+        drawText();
         initTexture();
     });
 };
